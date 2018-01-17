@@ -14,20 +14,22 @@ $( () => {
     });
   }
 
-  function renderTableBody(formData) {
-    let table = $("#forms-table");
+  function renderTableBody(response) {
+    
+    let table = $("#formsgetTable");
     let tbody = $("<tbody>");
 
     $.each(response, (index, form) => {
       let tr = $("<tr>");
       let idTd = $("<td>");
-      idTd.text(form.formId);
+      console.log(idTd.text(form.formId));
 
       let nameTd = $("<td>");
       nameTd.text(form.formName);
 
       let btnTd = $("<td>");
       let btnRender = $("<button>").text("Render").addClass("render-button");
+      btnRender.attr("data-id", form.formId);
 
       btnTd.append(btnRender);
 
@@ -38,5 +40,17 @@ $( () => {
   }
 
   requestData();
+
+  $(document).on("click", ".render-button", function() {
+    console.log($(this).attr("data-id"));
+    let id = $(this).attr("data-id");
+    $.ajax({
+      url: apiURL + id,
+      method: "GET"
+    })
+    .done(function(response){
+      console.log(response);
+    })
+  })
 
 });
