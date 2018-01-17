@@ -94,7 +94,18 @@ $( () => {
         elWrapper.append(label, el);
         elements.append(elWrapper);
       }
-      form.append(elements);
+
+      let submitWrapper = $("<div>");
+      submitWrapper.addClass("submit-wrapper");
+
+      let submitBtn = $("<input>");
+      submitBtn.attr("type", "submit");
+      submitBtn.attr("value", "Submit");
+      submitBtn.addClass("submit");
+
+      submitWrapper.append(submitBtn);
+
+      form.append(title, elements, submitBtn);
       $(".formWrapper").empty();
       $(".formWrapper").append(form);
     })
