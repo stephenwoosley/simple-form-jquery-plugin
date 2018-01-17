@@ -1,6 +1,6 @@
 $( () => {
 
-  const apiURL = "http://api.alperg.com/forms";
+  const apiURL = "http://api.alperg.com/forms/";
 
   function requestData() {
     $.ajax({
@@ -16,7 +16,7 @@ $( () => {
 
   function renderTableBody(response) {
     
-    let table = $("#formsgetTable");
+    let table = $("#formsTable");
     let tbody = $("<tbody>");
 
     $.each(response, (index, form) => {
@@ -42,14 +42,61 @@ $( () => {
   requestData();
 
   $(document).on("click", ".render-button", function() {
-    console.log($(this).attr("data-id"));
     let id = $(this).attr("data-id");
+    console.log(id);
+    
     $.ajax({
       url: apiURL + id,
       method: "GET"
     })
     .done(function(response){
-      console.log(response);
+      
+      let formData = response[0];
+      console.log(formData);
+
+      let form = $("<form>");
+      form.attr("role", "form");
+      form.attr("action", formData.formSubmitUrl);
+      form.attr("method", "get");
+      form.addClass("form");
+
+      let title = $("<div>");
+      title.addClass("title");
+      title.text(formData.formTitle);
+
+      let elements = $("<div>");
+      elements.addClass("elements");
+
+      for (let i=0; i < formData.formFields.length; i++) {
+        let elWrapper = $("<div>");
+        elWrapper.addClass("el-wrapper");
+
+        let label = $("<label>");
+        label.text(formData.formFields[i].label + ": ");
+
+        let el;
+        if(formData.formFields[i].type === "text") {
+          el = $("<input>");
+          el.attr("type", "text");
+        }
+        else if (formData.formFields[i].type === "number"){
+          el = $("<input>");
+          el.attr("type", "number");
+        }
+        else if (formData.formFields[i].type === "textarea"){
+          el = $("<textarea>");
+          el.attr("rows", "4");
+          el.attr("cols", "50");
+        }
+
+        el.attr('name', formData.formFields[i].name);
+
+        elWrapper.append(label, el);
+        elements.append(elWrapper);
+      }
+      form.append(elements);
+      $(".formWrapper").empty();
+      $(".formWrapper").append(form);
     })
   })
 
