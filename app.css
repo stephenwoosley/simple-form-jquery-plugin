@@ -14,3 +14,21 @@ body {
 .table thead {
   background-color: #eaeaea;
 }
+
+.table tr:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.table th,
+.table td {
+  padding: 5px;
+}
+
+.render-button {
+  width: 80px;
+  height: 30px;
+  border-radius: 3px;
+  background-color: #4bcb7c;
+  outline: none;
+}
