@@ -57,7 +57,7 @@ body {
   padding: 5px;
   border: 1px solid #eaeaea;
   height: 25px;
-  border-radius: 4px;
+  border-radius: 6px;
   background-color: #cae6f8;
   margin-bottom: 4px;
   font-size: 18px;
@@ -80,5 +80,20 @@ body {
   border-radius: 3px;
   background-color: #4bcb7c;
   outline: none;
+}
+
+.form-wrapper .form .submit-wrapper {
+  margin: 20px 0 0 170px;
+}
+
+.form-wrapper .form .submit-wrapper .submit {
+  width: 170px;
+  height: 35px;
+  font-size: 16px;
+  background-color: #6f9ec1;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
 }
 

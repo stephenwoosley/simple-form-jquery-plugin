@@ -105,7 +105,7 @@ $( () => {
 
       submitWrapper.append(submitBtn);
 
-      form.append(title, elements, submitBtn);
+      form.append(title, elements, submitWrapper);
       $(".formWrapper").empty();
       $(".formWrapper").append(form);
     })
